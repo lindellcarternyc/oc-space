@@ -1,10 +1,24 @@
-import ActionKey from './actionKeys'
+export enum Pages {
+  Home = 'Home',
+  SignIn = 'SignIn',
+  UpcomingPerformances = 'Upcoming Performances'
+}
+
+export const SwitchPageActionType = 'Switch Page'
+export type SwitchPageActionType = typeof SwitchPageActionType
 
 interface SwitchPageAction {
-  type: ActionKey.SWITCH_PAGE
+  type: SwitchPageActionType,
   payload: {
-    toPage: 'Sign In' | 'Home'
+    toPage: Pages
+  }
+}
+export const switchPage = (toPage: string | Pages) => {
+  return {
+    type: SwitchPageActionType,
+    payload: { toPage }
   }
 }
 
-export default SwitchPageAction
+type PageAction = SwitchPageAction
+export default PageAction

@@ -1,11 +1,21 @@
-import ActionKey from './actionKeys'
 import { Performance } from '../types'
 
+export const AddPerformanceActionType = 'Add Performance Action'
+export type AddPerformanceActionType = typeof AddPerformanceActionType
+
 interface AddPerformanceAction {
-  type: ActionKey.ADD_PERFORMANCE
+  type: AddPerformanceActionType
   payload: {
     performance: Performance
   }
 }
 
-export default AddPerformanceAction
+export const addPerformance = (performance: Performance): AddPerformanceAction => {
+  return {
+    type: AddPerformanceActionType,
+    payload: { performance }
+  }
+}
+
+type PerformanceAction = AddPerformanceAction
+export default PerformanceAction
