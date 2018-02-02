@@ -1,22 +1,19 @@
-import * as React from 'react';
-import './App.css';
+import * as React from 'react'
 
-const logo = require('./logo.svg');
+import Page from './components/page'
 
-class App extends React.Component {
+class App extends React.Component<{}, {authenticated: boolean}> {
+  state = {
+    authenticated: false
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <div className='App'>
+        <Page authenticated={this.state.authenticated}/>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
