@@ -1,21 +1,18 @@
 import { Reducer } from 'redux'
+import PageAction, { SwitchPageActionType, Pages } from '../actions/page'
+import PageState from '../store/page'
 
-import { PageStore } from '../store/store-state'
-import ActionKey from '../actions/actionKeys'
-import SwitchPageAction from '../actions/page'
-
-const initialState: PageStore = {
-  currentPage: 'Home'
+const initialState: PageState = {
+  currentPage: Pages.Home
 }
 
-const pageReducer: Reducer<PageStore> = (
-  state: PageStore = initialState,
-  action: SwitchPageAction
+const pageReducer: Reducer<PageState> = (
+  state: PageState = initialState, action: PageAction
 ) => {
   switch (action.type) {
-    case ActionKey.SWITCH_PAGE:
-      const { toPage } = action.payload
-      return {...state, currentPage: toPage}
+    case SwitchPageActionType:
+      const currentPage = action.payload.toPage
+      return {...state, currentPage}
     default: return state
   }
 }
