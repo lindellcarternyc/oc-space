@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Page from './components/page'
+import Home from './pages/home'
 
 class App extends React.Component<{}, {authenticated: boolean}> {
   state = {
@@ -10,7 +10,7 @@ class App extends React.Component<{}, {authenticated: boolean}> {
   render() {
     return (
       <div className='App'>
-        <Page authenticated={this.state.authenticated}/>
+        <Home />
       </div>
     )
   }
