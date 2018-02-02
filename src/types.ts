@@ -5,6 +5,12 @@ export interface Performance {
   time: string
 }
 
+export interface User {
+  email: string
+}
+
 export interface StoreState {
-  performances: Performance[]
+  performanceStore: {
+    performances: Performance[]
+  }
 }

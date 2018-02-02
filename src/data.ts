@@ -1,4 +1,4 @@
-import { Performance } from './types'
+import { Performance, User } from './types'
 
 const matthew = require('./assets/images/matthew.png')
 
@@ -24,3 +24,18 @@ const Performances: Performance[] = [
 ]
 
 export const getPerformances = () => Performances
+
+const Users: User[] = [
+  {
+    email: 'lindellcarternyc@gmail.com'
+  }
+]
+
+export const getUsers = () => Users
+export const getUserByEmail = (email: string): User | null => {
+  const filtered = getUsers().filter(user => user.email === email)
+  if (filtered.length >= 1) {
+    return filtered[0]
+  }
+  return null
+}

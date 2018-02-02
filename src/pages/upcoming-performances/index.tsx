@@ -1,43 +1,42 @@
 import * as React from 'react'
 
-import { connect, Dispatch } from 'react-redux'
-import { StoreState, Performance } from '../../types'
-import { matthewImg } from '../../constants'
-import * as actions from '../../actions'
+import { connect } from 'react-redux'
+import { Dispatch, bindActionCreators } from 'redux'
+
+import StoreState from '../../store/store-state'
+import { addPerformance } from '../../actions'
 
 import { Header, Card, Button } from 'semantic-ui-react'
+const image = require('../../assets/images/matthew.png')
+import UpcomingPerformanceCard from './upcoming-performance-card'
 
 import Page from '../../components/page'
-import UpcomingPerformanceCard from './upcoming-performance-card'
+import { Performance } from '../../types'
 
 interface UpcomingPerformancesProps {
   performances: Performance[]
-  dispatch: Dispatch<actions.AddPerformance>
+  addPerformance: (performance: Performance) => void
 }
 
-let added = 0
+// let added = 0
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
-  const { performances } = props
   return (
-    <Page authenticated={false}>
+    <Page authenticated={false} signinCallback={() => console.dir('signin from upcoming?')}>
       <Button 
         content='Add Performance '
         onClick={() => {
-          if (added === 0) {
-            props.dispatch(
-              actions.addPerformance({
-                image: matthewImg, location: 'Times Square',
-                date: 'Fri, March 1', time: '6 - 9PM'
-              })
-            )
-            added += 1
-          }
+          props.addPerformance({
+            image: image as string,
+            location: 'Times Square',
+            time: '6 - 9PM',
+            date: 'Mon, June 8'
+          })
         }}
       />
       <Header as='h2' content='Upcoming Performances' />
       <Card.Group>
-        {performances.map(performance => {
+        {props.performances.map(performance => {
           return (
             <UpcomingPerformanceCard 
               key={performance.date + '_' + performance.location}
@@ -51,20 +50,19 @@ const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
 }
 
 const mapStateToProps = (state: StoreState): { performances: Performance[] } => {
-  const { performances } = state
-  return {
-    performances
+  const { performanceStore } = state
+  return { 
+    performances: performanceStore.performances
   }
 }
-// const mapDispatchToProps = (dispatch: Dispatch<actions.AddPerformance>) => {
-//   return {
-//     addPerformance: (performance: Performance) => {
-//       console.dir('map dispatch add Performance')
-//       dispatch(actions.addPerformance(performance))
-//     }
-//   }
-// }
+
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+  return {
+    addPerformance: bindActionCreators(addPerformance, dispatch)
+  }
+}
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UpcomingPerformances)

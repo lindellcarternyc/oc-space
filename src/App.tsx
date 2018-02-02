@@ -1,43 +1,69 @@
 import * as React from 'react'
 
-import { Provider } from 'react-redux'
-import store from './store'
-import UpcomingPerformances from './pages/upcoming-performances'
-// const matthew = require('./assets/images/matthew.png')
+import { connect, } from 'react-redux'
+import { Dispatch, bindActionCreators } from 'redux'
+import StoreState from './store/store-state'
+import { switchPage } from './actions'
 
-// const Performances: Performance[] = [
-//   {
-//     image: matthew as string,
-//     date: 'Fri, Februrary 2',
-//     location: 'Port Authority',
-//     time: '6 - 9PM'
-//   },
-//   {
-//     image: matthew as string,
-//     date: 'Mon, February 5',
-//     location: 'Times Square',
-//     time: '6 - 10PM'
-//   },
-//   {
-//     image: matthew as string,
-//     date: 'Thu, February 8',
-//     location: 'Port Authority',
-//     time: '6 - 9PM'
-//   }
-// ]
+import Home from './pages/home'
+import Signin from './pages/sign-in'
 
-class App extends React.Component<{}, {authenticated: boolean}> {
-  state = {
-    authenticated: false
+interface AppProps {
+  currentPage: string
+  switchPage: (toPage: string) => void
+}
+class App extends React.Component<AppProps> {
+  constructor(props: AppProps) {
+    super(props)
+  }
+
+  // arrow funtion for lexical this binding
+  goToSignIn = () => {
+    this.props.switchPage('Sign In')
+  }
+
+  handleSignIn = (email: string, password: string) => {
+    console.dir({email, password})
+  }
+
+  renderCurrentPage(): JSX.Element | null {
+    const { currentPage } = this.props
+    switch (currentPage) {
+      case 'Home':
+        return (
+          <Home signinCallback={this.goToSignIn}/>
+        )
+      case 'Sign In':
+        return (
+          <Signin handleSignIn={this.handleSignIn}/>
+        )
+      default: return null
+    }
   }
 
   render() {
     return (
-      <Provider store={store}>
-        <UpcomingPerformances />
-      </Provider>
+      <div>
+        {this.renderCurrentPage()}
+      </div>
     )
   }
 }
 
-export default App
+const mapStateToProps = (state: StoreState) => {
+  const currentPage = state.pageStore.currentPage
+  return {
+    currentPage
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+  return {
+    switchPage: bindActionCreators(switchPage, dispatch)
+  }
+}
+
+export default connect<{}, {}, AppProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(App) as React.ComponentClass<{}>
