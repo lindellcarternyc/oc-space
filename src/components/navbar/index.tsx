@@ -36,6 +36,7 @@ const NavbarAdminMenu = () => {
 interface NavbarProps {
   authenticated: boolean
   signinCallback: () => void
+  upcomingPerformancesCallback: () => void
 }
 const Navbar = (props: NavbarProps): JSX.Element => {
   const { authenticated } = props
@@ -48,7 +49,10 @@ const Navbar = (props: NavbarProps): JSX.Element => {
       inverted
     >
       <Container>
-        <Menu.Item content='Upcoming Performances' />
+        <Menu.Item 
+          content='Upcoming Performances'
+          onClick={props.upcomingPerformancesCallback}
+        />
         {authenticated === false && 
           <NavbarAuthMenu 
             didClickSignIn={props.signinCallback}
