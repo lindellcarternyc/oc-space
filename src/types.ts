@@ -7,10 +7,5 @@ export interface Performance {
 
 export interface User {
   email: string
-}
-
-export interface StoreState {
-  performanceStore: {
-    performances: Performance[]
-  }
+  password: string
 }

@@ -27,7 +27,8 @@ export const getPerformances = () => Performances
 
 const Users: User[] = [
   {
-    email: 'lindellcarternyc@gmail.com'
+    email: 'lindellcarternyc@gmail.com',
+    password: 'password1'
   }
 ]
 
