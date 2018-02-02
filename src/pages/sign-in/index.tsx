@@ -22,6 +22,8 @@ interface SignInState {
 }
 interface SignInProps {
   handleSignIn: (email: string, password: string) => void
+  upcomingPerformancesCallback: () => void
+  isAuthenticated: boolean
 }
 class SignIn extends React.Component<SignInProps, SignInState> {
   constructor(props: SignInProps) {
@@ -153,7 +155,11 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   render() {
     const { error } = this.state
     return (
-      <Page authenticated={false} signinCallback={() => console.dir('on signin already')}>
+      <Page 
+        authenticated={this.props.isAuthenticated} 
+        signinCallback={() => console.dir('on signin already')}
+        upcomingPerformancesCallback={this.props.upcomingPerformancesCallback}
+      >
         <Header as='h2' content='Sign In' />
         <Form warning={error !== undefined} onSubmit={this.onSubmit}>
           <Form.Field 
