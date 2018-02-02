@@ -3,39 +3,82 @@ import * as React from 'react'
 import { connect, } from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
 import StoreState from './store/store-state'
-import { switchPage } from './actions'
+
+import { switchPage, Pages } from './actions/page'
+import { signIn } from './actions/auth'
+
+import { Performance } from './types'
 
 import Home from './pages/home'
 import Signin from './pages/sign-in'
+import UpcomingPerformances from './pages/upcoming-performances'
+
+import { User } from './types'
+import { getUserByEmail } from './data'
 
 interface AppProps {
   currentPage: string
   switchPage: (toPage: string) => void
+
+  performances: Performance[]
+
+  signIn: (user: User) => void
+  user: User | null
 }
 class App extends React.Component<AppProps> {
   constructor(props: AppProps) {
     super(props)
   }
 
+  get isAuthenticated(): boolean {
+    return this.props.user !== null
+  }
+
   // arrow funtion for lexical this binding
   goToSignIn = () => {
-    this.props.switchPage('Sign In')
+    this.props.switchPage(Pages.SignIn)
+  }
+
+  goToUpcomingPerformances = () => {
+    this.props.switchPage(Pages.UpcomingPerformances)
   }
 
   handleSignIn = (email: string, password: string) => {
-    console.dir({email, password})
+    const user = getUserByEmail(email)
+    if (user !== null) {
+      if (user.password === password) {
+        this.props.signIn(user)
+        this.props.switchPage(Pages.Home)
+      }
+    }
   }
 
   renderCurrentPage(): JSX.Element | null {
     const { currentPage } = this.props
     switch (currentPage) {
-      case 'Home':
+      case Pages.Home:
         return (
-          <Home signinCallback={this.goToSignIn}/>
+          <Home
+            isAuthenticated={this.isAuthenticated}
+            signinCallback={this.goToSignIn}
+            upcomingPerformancesCallback={this.goToUpcomingPerformances}
+          />
         )
-      case 'Sign In':
+      case Pages.SignIn:
         return (
-          <Signin handleSignIn={this.handleSignIn}/>
+          <Signin
+            isAuthenticated={this.isAuthenticated}
+            handleSignIn={this.handleSignIn}
+            upcomingPerformancesCallback={this.goToUpcomingPerformances}
+          />
+        )
+      case Pages.UpcomingPerformances:
+        return (
+          <UpcomingPerformances
+            isAuthenticated={this.isAuthenticated}
+            performances={this.props.performances}
+            signinCallback={this.goToSignIn}
+          />
         )
       default: return null
     }
@@ -51,15 +94,18 @@ class App extends React.Component<AppProps> {
 }
 
 const mapStateToProps = (state: StoreState) => {
-  const currentPage = state.pageStore.currentPage
+  const { pageState, performanceState, authState } = state
   return {
-    currentPage
+    currentPage: pageState.currentPage,
+    performances: performanceState.performances,
+    user: authState.user
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
   return {
-    switchPage: bindActionCreators(switchPage, dispatch)
+    switchPage: bindActionCreators(switchPage, dispatch),
+    signIn: bindActionCreators(signIn, dispatch)
   }
 }
 
