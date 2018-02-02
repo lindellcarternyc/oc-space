@@ -1,16 +1,11 @@
-import { Performance } from '../types'
-
-export interface PerformanceStore {
-  performances: Performance[]
-}
-
-export interface PageStore {
-  currentPage: string
-}
+import PerformanceState from './performance'
+import PageState from './page'
+import AuthState from './auth'
 
 interface StoreState {
-  performanceStore: PerformanceStore
-  pageStore: PageStore
+  performanceState: PerformanceState
+  pageState: PageState
+  authState: AuthState
 }
 
 export default StoreState
