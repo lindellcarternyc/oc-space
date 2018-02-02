@@ -1,13 +1,24 @@
 import * as React from 'react'
 
+import { Container } from 'semantic-ui-react'
+
 import Navbar from '../navbar'
 
-const Page = (props: { authenticated: boolean}): JSX.Element => {
+interface PageProps {
+  authenticated: boolean
+  children: React.ReactNode
+}
+const Page = (props: PageProps): JSX.Element => {
   const { authenticated } = props
   return (
-    <Navbar 
-      authenticated={authenticated}
-    />
+    <div>
+      <Navbar 
+        authenticated={authenticated}
+      />
+      <Container style={{marginTop: '4em'}}>
+        {props.children}
+      </Container>
+    </div>
   )
 }
 
