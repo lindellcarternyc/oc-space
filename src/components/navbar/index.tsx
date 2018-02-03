@@ -46,6 +46,7 @@ interface NavbarProps {
   authenticated: boolean
   goToUpcomingPerformances: () => void
   goToSignIn: () => void
+  goToHome: () => void
 }
 const Navbar = (props: NavbarProps): JSX.Element => {
   const { authenticated } = props
@@ -58,6 +59,7 @@ const Navbar = (props: NavbarProps): JSX.Element => {
       inverted
     >
       <Container>
+        <Menu.Item icon='home' onClick={props.goToHome}/>
         <Menu.Item 
           content='Upcoming Performances'
           onClick={props.goToUpcomingPerformances}
@@ -85,6 +87,9 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
     },
     goToSignIn: () => {
       dispatch(navigateToPage(Page.SignInPage))
+    },
+    goToHome: () => {
+      dispatch(navigateToPage(Page.HomePage))
     }
   }
 }

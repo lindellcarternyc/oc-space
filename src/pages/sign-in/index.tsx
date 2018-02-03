@@ -21,7 +21,7 @@ interface SignInState {
   } | undefined
 }
 interface SignInProps {
-  isAuthenticated: boolean
+  
 }
 class SignIn extends React.Component<SignInProps, SignInState> {
   constructor(props: SignInProps) {
@@ -155,7 +155,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     const { error } = this.state
     return (
       <Page
-        authenticated={this.props.isAuthenticated}
+        authenticated={false}
       >
         <Header as='h2' content='Sign In' />
         <Form warning={error !== undefined} onSubmit={this.onSubmit}>

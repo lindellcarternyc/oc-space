@@ -11,13 +11,12 @@ import StoreState from '../../store/state'
 
 interface UpcomingPerformancesProps {
   performances: Performance[]
-  isAuthenticated: boolean
 }
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   return (
     <Page
-      authenticated={props.isAuthenticated}
+      authenticated={false}
     >
       <Header as='h2' content='Upcoming Performances' />
       <Card.Group>

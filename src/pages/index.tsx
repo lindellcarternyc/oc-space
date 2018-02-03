@@ -22,15 +22,15 @@ class PageDisplay extends React.Component<PageDisplayProps> {
     switch (currentPage) {
       case Page.UpcomingPerformances:
         return (
-          <UpcomingPerformances isAuthenticated={false}/>
+          <UpcomingPerformances />
         )
       case Page.SignInPage:
         return (
-          <SignIn isAuthenticated={false}/>
+          <SignIn />
         )
       default: 
         return (
-          <Home isAuthenticated={false}/>
+          <Home />
         )
     }
   }
