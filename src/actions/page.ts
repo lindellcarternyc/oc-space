@@ -1,7 +1,8 @@
 export enum Pages {
   Home = 'Home',
   SignIn = 'SignIn',
-  UpcomingPerformances = 'Upcoming Performances'
+  UpcomingPerformances = 'Upcoming Performances',
+  AddPerformance = 'Add Performance'
 }
 
 export const SwitchPageActionType = 'Switch Page'

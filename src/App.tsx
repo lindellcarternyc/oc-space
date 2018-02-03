@@ -12,6 +12,7 @@ import { Performance } from './types'
 import Home from './pages/home'
 import Signin from './pages/sign-in'
 import UpcomingPerformances from './pages/upcoming-performances'
+import AddPerformance from './pages/add-performance'
 
 import { User } from './types'
 import { getUserByEmail } from './data'
@@ -43,6 +44,10 @@ class App extends React.Component<AppProps> {
     this.props.switchPage(Pages.UpcomingPerformances)
   }
 
+  goToAddPerformace = () => {
+    this.props.switchPage(Pages.AddPerformance)
+  }
+
   handleSignIn = (email: string, password: string) => {
     const user = getUserByEmail(email)
     if (user !== null) {
@@ -59,6 +64,7 @@ class App extends React.Component<AppProps> {
       case Pages.Home:
         return (
           <Home
+            addPerformanceCallback={this.goToAddPerformace}
             isAuthenticated={this.isAuthenticated}
             signinCallback={this.goToSignIn}
             upcomingPerformancesCallback={this.goToUpcomingPerformances}
@@ -75,11 +81,24 @@ class App extends React.Component<AppProps> {
       case Pages.UpcomingPerformances:
         return (
           <UpcomingPerformances
+            addPermanceCallback={this.goToAddPerformace}
             isAuthenticated={this.isAuthenticated}
             performances={this.props.performances}
             signinCallback={this.goToSignIn}
           />
         )
+      case Pages.AddPerformance:
+        if (this.isAuthenticated) {
+          return (
+            <AddPerformance 
+              signinCallback={() => { return }}
+              upcomingPerformacesCallback={this.goToUpcomingPerformances}
+              isAuthenticated={this.isAuthenticated}
+            />
+          )
+        } else {
+          return null
+        }
       default: return null
     }
   }

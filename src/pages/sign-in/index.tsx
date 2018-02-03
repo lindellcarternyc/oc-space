@@ -155,7 +155,8 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   render() {
     const { error } = this.state
     return (
-      <Page 
+      <Page
+        addPerformanceCallback={() => { return }}
         authenticated={this.props.isAuthenticated} 
         signinCallback={() => console.dir('on signin already')}
         upcomingPerformancesCallback={this.props.upcomingPerformancesCallback}

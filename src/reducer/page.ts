@@ -3,7 +3,7 @@ import PageAction, { SwitchPageActionType, Pages } from '../actions/page'
 import PageState from '../store/page'
 
 const initialState: PageState = {
-  currentPage: Pages.Home
+  currentPage: Pages.AddPerformance
 }
 
 const pageReducer: Reducer<PageState> = (

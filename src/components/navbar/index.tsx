@@ -25,10 +25,13 @@ const NavbarAuthMenu = (props: NavbarAuthMenuProps) => {
   )
 }
 
-const NavbarAdminMenu = () => {
+interface NavbarAdminMenuProps {
+  addPerformanceCallback: () => void
+}
+const NavbarAdminMenu = (props: NavbarAdminMenuProps) => {
   return (
     <Menu.Menu position='right'>
-      <Menu.Item content='Add Concert' />
+      <Menu.Item content='Add Performance' onClick={props.addPerformanceCallback}/>
     </Menu.Menu>
   )
 }
@@ -37,6 +40,7 @@ interface NavbarProps {
   authenticated: boolean
   signinCallback: () => void
   upcomingPerformancesCallback: () => void
+  addPerformanceCallback: () => void
 }
 const Navbar = (props: NavbarProps): JSX.Element => {
   const { authenticated } = props
@@ -60,7 +64,9 @@ const Navbar = (props: NavbarProps): JSX.Element => {
           />
         }
         {authenticated === true &&
-          <NavbarAdminMenu />
+          <NavbarAdminMenu
+            addPerformanceCallback={props.addPerformanceCallback}
+          />
         }
       </Container>
     </Menu>

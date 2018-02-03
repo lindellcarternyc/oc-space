@@ -7,6 +7,7 @@ import Navbar from '../navbar'
 interface PageProps {
   authenticated: boolean
   signinCallback: () => void
+  addPerformanceCallback: () => void
   upcomingPerformancesCallback: () => void
   children: React.ReactNode
 }
@@ -14,7 +15,8 @@ const Page = (props: PageProps): JSX.Element => {
   const { authenticated } = props
   return (
     <div>
-      <Navbar 
+      <Navbar
+        addPerformanceCallback={props.addPerformanceCallback}
         authenticated={authenticated}
         signinCallback={props.signinCallback}
         upcomingPerformancesCallback={props.upcomingPerformancesCallback}

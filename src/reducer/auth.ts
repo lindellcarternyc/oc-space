@@ -2,8 +2,10 @@ import { Reducer } from 'redux'
 import AuthAction, { SignInActionType } from '../actions/auth'
 import AuthState from '../store/auth'
 
+import { getUserByEmail } from '../data'
+
 const initialState: AuthState = {
-  user: null
+  user: getUserByEmail('lindellcarternyc@gmail.com')
 }
 
 const authReducer: Reducer<AuthState> = (

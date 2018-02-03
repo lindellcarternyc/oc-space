@@ -11,11 +11,20 @@ interface UpcomingPerformancesProps {
   performances: Performance[]
   signinCallback: () => void
   isAuthenticated: boolean
+  addPermanceCallback: () => void
 }
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
+  const addPermanceCallback = () => {
+    if (props.isAuthenticated) {
+      props.addPermanceCallback()
+    } else {
+      return
+    }
+  }
   return (
-    <Page 
+    <Page
+      addPerformanceCallback={addPermanceCallback}
       authenticated={props.isAuthenticated} 
       signinCallback={props.signinCallback}
       upcomingPerformancesCallback={() => {console.dir('already on upcoming performances')}}
