@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux'
-import StoreState from '../store/store-state'
+import StoreState from '../store/state'
 
-import performanceReducer from './performance'
-import pageReducer from './page'
-import authReducer from './auth'
+import navigationReducer from './navigation-reducer'
+import performancesReducer from './performances-reducer'
 
-const reducer = combineReducers<StoreState>({
-  performanceState: performanceReducer,
-  pageState: pageReducer,
-  authState: authReducer
+const rootReducer = combineReducers<StoreState>({
+  navigationState: navigationReducer,
+  performancesState: performancesReducer
 })
 
-export default reducer
+export default rootReducer

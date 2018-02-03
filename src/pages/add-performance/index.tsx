@@ -12,8 +12,6 @@ import { Location } from '../../types'
 
 interface AddPerformanceProps {
   isAuthenticated: true
-  signinCallback: () => void
-  upcomingPerformacesCallback: () => void
 }
 
 interface AddPerformanceState {
@@ -63,10 +61,7 @@ class AddPerformance extends React.Component<AddPerformanceProps, AddPerformance
   render() {
     return (
       <Page
-        addPerformanceCallback={() => { return }}
         authenticated={this.props.isAuthenticated}
-        signinCallback={this.props.signinCallback}
-        upcomingPerformancesCallback={this.props.upcomingPerformacesCallback}
       >
         <Header as='h2' content='Add Performance' />
         <Form>

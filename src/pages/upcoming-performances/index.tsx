@@ -1,33 +1,23 @@
 import * as React from 'react'
 
 import { Header, Card, } from 'semantic-ui-react'
-// const image = require('../../assets/images/matthew.png')
 import UpcomingPerformanceCard from './upcoming-performance-card'
 
 import Page from '../../components/page'
 import { Performance } from '../../types'
 
+import { connect } from 'react-redux'
+import StoreState from '../../store/state'
+
 interface UpcomingPerformancesProps {
   performances: Performance[]
-  signinCallback: () => void
   isAuthenticated: boolean
-  addPermanceCallback: () => void
 }
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
-  const addPermanceCallback = () => {
-    if (props.isAuthenticated) {
-      props.addPermanceCallback()
-    } else {
-      return
-    }
-  }
   return (
     <Page
-      addPerformanceCallback={addPermanceCallback}
-      authenticated={props.isAuthenticated} 
-      signinCallback={props.signinCallback}
-      upcomingPerformancesCallback={() => {console.dir('already on upcoming performances')}}
+      authenticated={props.isAuthenticated}
     >
       <Header as='h2' content='Upcoming Performances' />
       <Card.Group>
@@ -44,4 +34,12 @@ const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   )
 }
 
-export default UpcomingPerformances
+const mapStateToProps = (state: StoreState) => {
+  return {
+    performances: state.performancesState.upcomingPerformances
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(UpcomingPerformances)

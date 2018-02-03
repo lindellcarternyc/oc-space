@@ -1,0 +1,54 @@
+import * as React from 'react'
+
+import { Page } from '../types/navigation-types'
+import Home from './home'
+import UpcomingPerformances from './upcoming-performances'
+import SignIn from './sign-in'
+
+import StoreState from '../store/state'
+import { connect } from 'react-redux'
+
+interface PageDisplayProps {
+  currentPage: Page
+}
+class PageDisplay extends React.Component<PageDisplayProps> {
+  constructor(props: PageDisplayProps) {
+    super(props)
+  }
+
+  renderCurrentPage() {
+    const { currentPage } = this.props
+    
+    switch (currentPage) {
+      case Page.UpcomingPerformances:
+        return (
+          <UpcomingPerformances isAuthenticated={false}/>
+        )
+      case Page.SignInPage:
+        return (
+          <SignIn isAuthenticated={false}/>
+        )
+      default: 
+        return (
+          <Home isAuthenticated={false}/>
+        )
+    }
+  }
+  render() {
+    return (
+      <div>
+        {this.renderCurrentPage()}
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state: StoreState) => {
+  return {
+    currentPage: state.navigationState.currentPage
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(PageDisplay)

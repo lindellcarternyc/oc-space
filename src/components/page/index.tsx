@@ -4,6 +4,12 @@ import { Container } from 'semantic-ui-react'
 
 import Navbar from '../navbar'
 
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import StoreState from '../../store/state'
+import { navigateToPage } from '../../actions/navigation-actions'
+import * as NavigationTypes from '../../types/navigation-types'
+
 interface PageProps {
   authenticated: boolean
   signinCallback: () => void
@@ -16,10 +22,7 @@ const Page = (props: PageProps): JSX.Element => {
   return (
     <div>
       <Navbar
-        addPerformanceCallback={props.addPerformanceCallback}
         authenticated={authenticated}
-        signinCallback={props.signinCallback}
-        upcomingPerformancesCallback={props.upcomingPerformancesCallback}
       />
       <Container style={{marginTop: '4em'}}>
         {props.children}
@@ -28,4 +31,21 @@ const Page = (props: PageProps): JSX.Element => {
   )
 }
 
-export default Page
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+  return {
+    signinCallback: () => {
+      dispatch(navigateToPage(NavigationTypes.Page.SignInPage))
+    },
+    addPerformanceCallback: () => {
+      dispatch(navigateToPage(NavigationTypes.Page.AddPerformance))
+    },
+    upcomingPerformancesCallback: () => {
+      dispatch(navigateToPage(NavigationTypes.Page.UpcomingPerformances))
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Page)

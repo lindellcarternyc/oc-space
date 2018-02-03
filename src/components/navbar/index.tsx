@@ -2,6 +2,12 @@ import * as React from 'react'
 
 import { Menu, Button, Container } from 'semantic-ui-react'
 
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import { navigateToPage } from '../../actions/navigation-actions'
+import { Page } from '../../types/navigation-types'
+import StoreState from '../../store/state'
+
 interface NavbarAuthMenuProps {
   didClickSignIn: () => void
   didClickSignUp: () => void
@@ -38,9 +44,8 @@ const NavbarAdminMenu = (props: NavbarAdminMenuProps) => {
 
 interface NavbarProps {
   authenticated: boolean
-  signinCallback: () => void
-  upcomingPerformancesCallback: () => void
-  addPerformanceCallback: () => void
+  goToUpcomingPerformances: () => void
+  goToSignIn: () => void
 }
 const Navbar = (props: NavbarProps): JSX.Element => {
   const { authenticated } = props
@@ -55,17 +60,17 @@ const Navbar = (props: NavbarProps): JSX.Element => {
       <Container>
         <Menu.Item 
           content='Upcoming Performances'
-          onClick={props.upcomingPerformancesCallback}
+          onClick={props.goToUpcomingPerformances}
         />
         {authenticated === false && 
           <NavbarAuthMenu 
-            didClickSignIn={props.signinCallback}
+            didClickSignIn={props.goToSignIn}
             didClickSignUp={() => console.dir('signup')}
           />
         }
         {authenticated === true &&
           <NavbarAdminMenu
-            addPerformanceCallback={props.addPerformanceCallback}
+            addPerformanceCallback={() => { return }}
           />
         }
       </Container>
@@ -73,4 +78,17 @@ const Navbar = (props: NavbarProps): JSX.Element => {
   )
 }
 
-export default Navbar
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+  return {
+    goToUpcomingPerformances: () => {
+      dispatch(navigateToPage(Page.UpcomingPerformances))
+    },
+    goToSignIn: () => {
+      dispatch(navigateToPage(Page.SignInPage))
+    }
+  }
+}
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navbar)
