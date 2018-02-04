@@ -1,11 +1,10 @@
 import * as React from 'react'
 
-import { Header, Card, } from 'semantic-ui-react'
-import UpcomingPerformanceCard from './upcoming-performance-card'
-
+import { Header } from 'semantic-ui-react'
 import Page from '../../components/page'
-import { Performance } from '../../types'
+import PerformanceCards from '../../components/performance-card/performance-cards'
 
+import { Performance } from '../../types'
 import { connect } from 'react-redux'
 import StoreState from '../../store/state'
 
@@ -17,16 +16,7 @@ const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   return (
     <Page>
       <Header as='h2' content='Upcoming Performances' />
-      <Card.Group>
-        {props.performances.map(performance => {
-          return (
-            <UpcomingPerformanceCard 
-              key={performance.date + '_' + performance.location}
-              performance={performance}
-            />
-          )
-        })}
-      </Card.Group>
+      <PerformanceCards performances={props.performances}/>
     </Page>
   )
 }
