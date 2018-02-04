@@ -8,6 +8,8 @@ import { navigateToPage } from '../../actions/navigation-actions'
 import { Page } from '../../types/navigation-types'
 import StoreState from '../../store/state'
 
+import { isAuthenticated } from '../../utils/auth-utils'
+
 interface NavbarAuthMenuProps {
   didClickSignIn: () => void
   didClickSignUp: () => void
@@ -80,6 +82,12 @@ const Navbar = (props: NavbarProps): JSX.Element => {
   )
 }
 
+const mapStateToProps = (state: StoreState) => {
+  const user = state.authState.user
+  const authenticated = isAuthenticated(user)
+  return { authenticated }
+}
+
 const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
   return {
     goToUpcomingPerformances: () => {
@@ -94,6 +102,6 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
   }
 }
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Navbar)
