@@ -28,11 +28,11 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
   }
   
   onChangeLocation = (location: Location) => {
-    let time: '6 - 9' | '6 - 10'
+    let time: '6 - 9PM' | '6 - 10PM'
     if (location === Location.TimesSquare) {
-      time = '6 - 10'
+      time = '6 - 10PM'
     } else {
-      time = '6 - 9'
+      time = '6 - 9PM'
     }
     this.setState({location, time})
   }
