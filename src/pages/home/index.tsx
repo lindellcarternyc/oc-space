@@ -15,9 +15,7 @@ interface HomeProps {
 }
 const Home = (props: HomeProps) => {
   return (
-    <Page 
-      authenticated={false}
-    >
+    <Page>
       <h1 style={{fontSize: '8em'}}>Opera Collective Space</h1>
       <Button 
         content='Upcoming Performances'

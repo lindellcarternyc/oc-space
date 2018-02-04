@@ -15,9 +15,7 @@ interface UpcomingPerformancesProps {
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   return (
-    <Page
-      authenticated={false}
-    >
+    <Page>
       <Header as='h2' content='Upcoming Performances' />
       <Card.Group>
         {props.performances.map(performance => {

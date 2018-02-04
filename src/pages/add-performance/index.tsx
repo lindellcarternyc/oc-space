@@ -60,9 +60,7 @@ class AddPerformance extends React.Component<AddPerformanceProps, AddPerformance
 
   render() {
     return (
-      <Page
-        authenticated={this.props.isAuthenticated}
-      >
+      <Page>
         <Header as='h2' content='Add Performance' />
         <Form>
           <Form.Field>

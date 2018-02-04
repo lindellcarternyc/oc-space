@@ -5,6 +5,16 @@ import { Header, Form, Input, Message } from 'semantic-ui-react'
 import Page from '../../components/page'
 
 import { isValidEmail, isValidPassword } from '../../utils'
+import { getUserForEmail } from '../../data/user-data'
+import { User } from '../../types/user-types'
+
+import { connect } from 'react-redux'
+import { Dispatch, } from 'redux' 
+import StoreState from '../../store/state'
+import { signIn } from '../../actions/auth-actions'
+
+import { navigateToPage } from '../../actions/navigation-actions'
+import * as NavTypes from '../../types/navigation-types'
 
 interface SignInState {
   email: {
@@ -21,7 +31,8 @@ interface SignInState {
   } | undefined
 }
 interface SignInProps {
-  
+  signIn: (user: User) => void
+  goToHome: () => void
 }
 class SignIn extends React.Component<SignInProps, SignInState> {
   constructor(props: SignInProps) {
@@ -29,11 +40,11 @@ class SignIn extends React.Component<SignInProps, SignInState> {
 
     this.state = {
       email: {
-        value: '',
+        value: 'lindellcarternyc@gmail.com',
         error: undefined
       },
       password: {
-        value: '',
+        value: 'password1',
         error: undefined
       },
       error: undefined
@@ -144,8 +155,13 @@ class SignIn extends React.Component<SignInProps, SignInState> {
 
     if (this.isValid()) {
       const { email, password } = this.state
-      console.dir('submit signin creds')
-      console.dir({email, password})
+      const user = getUserForEmail(email.value)
+      if (user !== null) {
+        if (user.password && user.password === password.value) {
+          this.props.signIn(user)
+          this.props.goToHome()
+        }
+      }
     } else {
       return
     }
@@ -154,9 +170,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   render() {
     const { error } = this.state
     return (
-      <Page
-        authenticated={false}
-      >
+      <Page>
         <Header as='h2' content='Sign In' />
         <Form warning={error !== undefined} onSubmit={this.onSubmit}>
           <Form.Field 
@@ -194,4 +208,18 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   }
 }
 
-export default SignIn
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+  return {
+    signIn: (user: User) => {
+      dispatch(signIn(user))
+    },
+    goToHome: () => {
+      dispatch(navigateToPage(NavTypes.Page.HomePage))
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn)
