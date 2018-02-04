@@ -10,8 +10,17 @@ import Page from '../../components/page'
 import LocationDropdown from './location-dropdown'
 import { Location } from '../../types'
 
+import { Performance } from '../../types'
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import StoreState from '../../store/state'
+import { addPerformance } from '../../actions/performances-actions'
+import { navigateToPage } from '../../actions/navigation-actions'
+import * as NavTypes from '../../types/navigation-types'
+
 interface AddPerformanceProps {
-  isAuthenticated: true
+  addPerformance: (performance: Performance) => void
+  goToUpcomingPerformances: () => void
 }
 
 interface AddPerformanceState {
@@ -49,7 +58,10 @@ class AddPerformance extends React.Component<AddPerformanceProps, AddPerformance
     const { date, time, location } = this.state
     
     if (date !== null && time !== null && location !== null) {
-      console.dir({date, time, location})
+      const image = ''
+      const performance: Performance = {image, date, time, location}
+      this.props.addPerformance(performance)
+      this.props.goToUpcomingPerformances()
     }
   }
 
@@ -88,4 +100,19 @@ class AddPerformance extends React.Component<AddPerformanceProps, AddPerformance
   }
 }
 
-export default AddPerformance
+const mapDispatchToProps = (dispatch: Dispatch<StoreState>): AddPerformanceProps => {
+  return {
+    addPerformance: (performance: Performance) => {
+      dispatch(addPerformance(performance))
+    },
+    goToUpcomingPerformances: () => {
+      dispatch(navigateToPage(NavTypes.Page.UpcomingPerformances))
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)
+(AddPerformance)

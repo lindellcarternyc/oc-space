@@ -4,6 +4,7 @@ import { Page } from '../types/navigation-types'
 import Home from './home'
 import UpcomingPerformances from './upcoming-performances'
 import SignIn from './sign-in'
+import AddPerformance from './add-performance'
 
 import StoreState from '../store/state'
 import { connect } from 'react-redux'
@@ -20,6 +21,10 @@ class PageDisplay extends React.Component<PageDisplayProps> {
     const { currentPage } = this.props
     
     switch (currentPage) {
+      case Page.AddPerformance:
+        return (
+          <AddPerformance />
+        )
       case Page.UpcomingPerformances:
         return (
           <UpcomingPerformances />
