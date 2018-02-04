@@ -49,6 +49,7 @@ interface NavbarProps {
   goToUpcomingPerformances: () => void
   goToSignIn: () => void
   goToHome: () => void
+  goToAddPerformance: () => void
 }
 const Navbar = (props: NavbarProps): JSX.Element => {
   const { authenticated } = props
@@ -74,7 +75,7 @@ const Navbar = (props: NavbarProps): JSX.Element => {
         }
         {authenticated === true &&
           <NavbarAdminMenu
-            addPerformanceCallback={() => { return }}
+            addPerformanceCallback={props.goToAddPerformance}
           />
         }
       </Container>
@@ -98,6 +99,9 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
     },
     goToHome: () => {
       dispatch(navigateToPage(Page.HomePage))
+    },
+    goToAddPerformance: () => {
+      dispatch(navigateToPage(Page.AddPerformance))
     }
   }
 }
