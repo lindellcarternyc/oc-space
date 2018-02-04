@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
+import LocationImage from '../../components/location-image/location-image'
 
 import { Performance } from '../../types'
 
@@ -8,10 +9,10 @@ interface UpcomingPerformanceCardProps {
 }
 
 const UpcomingPerformanceCard = (props: UpcomingPerformanceCardProps): JSX.Element => {
-  const { image, location, date, time } = props.performance
+  const { location, date, time } = props.performance
   return (
     <Card>
-      <Image src={image} />
+      <LocationImage location={location}/>
       <Card.Content>
         <Card.Header content={date + ' @ ' + location} />
         <Card.Description content={time} />
