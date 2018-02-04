@@ -46,13 +46,20 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
     const { date, time, location } = this.state
     
     if (date !== null && time !== null && location !== null) {
-      this.props.onSubmit({date, time, location})
+      const formattedDate = this.formatDate(date)
+      this.props.onSubmit({date: formattedDate, time, location})
     }
   }
 
   get isValid(): boolean {
     const { date, time, location } = this.state
     return date !== null && time !== null && location !== null
+  }
+
+  formatDate(date: string): string {
+    console.dir({date})
+    const parsed = moment(date, 'YYYY-MM-DD').format('ddd, MMMM D')
+    return parsed
   }
 
   render() {
