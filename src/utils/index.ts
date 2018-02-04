@@ -8,3 +8,5 @@ export const isValidEmail = (email: string): boolean => {
 export const isValidPassword = (password: string): boolean => {
   return password.length >= 5 && password.length <= 10
 }
+
+export { default as ImageUtils } from './image-utils'

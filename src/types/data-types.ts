@@ -6,7 +6,6 @@ export enum Location {
 }
 
 export interface Performance {
-  image: string
   location: Location
   date: string
   time: string
