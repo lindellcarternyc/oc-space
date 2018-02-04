@@ -1,11 +1,11 @@
 import { Reducer } from 'redux'
 
-import { Page } from '../types/navigation-types'
+import { Navigation } from '../types'
 import NavigationAction, { NavigateToPageActionType } from '../actions/navigation-actions'
 import NavigationState from '../store/navigation-state'
 
 const initialState: NavigationState = {
-  currentPage: Page.HomePage,
+  currentPage: Navigation.Page.HomePage,
   previousPage: null,
   history: []
 }

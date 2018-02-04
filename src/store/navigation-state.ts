@@ -1,9 +1,9 @@
-import { Page } from '../types/navigation-types'
+import { Navigation } from '../types'
 
 interface NavigationState {
-  currentPage: Page
-  previousPage: Page | null
-  history: Page[]
+  currentPage: Navigation.Page
+  previousPage: Navigation.Page | null
+  history: Navigation.Page[]
 }
 
 export default NavigationState

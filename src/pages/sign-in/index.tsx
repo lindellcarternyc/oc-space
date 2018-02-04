@@ -12,7 +12,7 @@ import StoreState from '../../store/state'
 import { signIn } from '../../actions/auth-actions'
 
 import { navigateToPage } from '../../actions/navigation-actions'
-import * as NavTypes from '../../types/navigation-types'
+import { Navigation } from '../../types'
 
 interface SignInProps {
   signIn: (user: User) => void
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
       dispatch(signIn(user))
     },
     goToHome: () => {
-      dispatch(navigateToPage(NavTypes.Page.HomePage))
+      dispatch(navigateToPage(Navigation.Page.HomePage))
     }
   }
 }

@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import StoreState from '../../store/state'
 import { navigateToPage } from '../../actions/navigation-actions'
-import { Page as NaviagtionPage } from '../../types/navigation-types'
+import { Navigation } from '../../types'
 
 interface HomeProps {
   goToUpcomingPerformances: () => void
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
   return {
     goToUpcomingPerformances: () => {
       dispatch(
-        navigateToPage(NaviagtionPage.UpcomingPerformances)
+        navigateToPage(Navigation.Page.UpcomingPerformances)
       )
     }
   }

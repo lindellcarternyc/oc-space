@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import StoreState from '../../store/state'
 import { addPerformance } from '../../actions/performances-actions'
 import { navigateToPage } from '../../actions/navigation-actions'
-import * as NavTypes from '../../types/navigation-types'
+import { Navigation } from '../../types'
 
 import AddPerformanceComponent from './add-performance-component'
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
       dispatch(addPerformance(performance))
     },
     goToUpcomingPerformances: () => {
-      dispatch(navigateToPage(NavTypes.Page.UpcomingPerformances))
+      dispatch(navigateToPage(Navigation.Page.UpcomingPerformances))
     }
   }
 }

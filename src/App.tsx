@@ -6,14 +6,14 @@ interface AppProps {
   
 }
 interface AppState {
-  authenticated: boolean
+  
 }
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
 
     this.state = {
-      authenticated: false,
+      
     }
   }
 

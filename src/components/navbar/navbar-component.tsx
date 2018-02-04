@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as NavTypes from '../../types/navigation-types'
+import { Navigation } from '../../types'
 
 import { Menu, Button, Container } from 'semantic-ui-react'
 
@@ -40,7 +40,7 @@ const NavbarAdminMenu = (props: NavbarAdminMenuProps) => {
 
 export interface NavbarComponentProps {
   authenticated: boolean
-  navigateToPage: (page: NavTypes.Page) => void
+  navigateToPage: (page: Navigation.Page) => void
 }
 
 const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
@@ -54,20 +54,20 @@ const NavbarComponent = (props: NavbarComponentProps): JSX.Element => {
       inverted
     >
       <Container>
-        <Menu.Item icon='home' onClick={() => { props.navigateToPage(NavTypes.Page.HomePage)}}/>
+        <Menu.Item icon='home' onClick={() => { props.navigateToPage(Navigation.Page.HomePage)}}/>
         <Menu.Item 
           content='Upcoming Performances'
-          onClick={() => { props.navigateToPage(NavTypes.Page.UpcomingPerformances)}}
+          onClick={() => { props.navigateToPage(Navigation.Page.UpcomingPerformances)}}
         />
         {authenticated === false && 
           <NavbarAuthMenu 
-            didClickSignIn={() => props.navigateToPage(NavTypes.Page.SignInPage)}
+            didClickSignIn={() => props.navigateToPage(Navigation.Page.SignInPage)}
             didClickSignUp={() => console.dir('signup')}
           />
         }
         {authenticated === true &&
           <NavbarAdminMenu
-            addPerformanceCallback={() => props.navigateToPage(NavTypes.Page.AddPerformance)}
+            addPerformanceCallback={() => props.navigateToPage(Navigation.Page.AddPerformance)}
           />
         }
       </Container>
