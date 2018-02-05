@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { Header } from 'semantic-ui-react'
-import Page from '../../components/page'
 import PerformanceCards from '../../components/performance-card/performance-cards'
 
 import { Performance } from '../../types'
@@ -14,10 +13,10 @@ interface UpcomingPerformancesProps {
 
 const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   return (
-    <Page>
+    <div>
       <Header as='h2' content='Upcoming Performances' />
       <PerformanceCards performances={props.performances}/>
-    </Page>
+    </div>
   )
 }
 

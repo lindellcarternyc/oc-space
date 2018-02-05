@@ -1,42 +1,19 @@
 import * as React from 'react'
 
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+
 import { Button } from 'semantic-ui-react'
 
-import Page from '../../components/page'
-
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import StoreState from '../../store/state'
-import { navigateToPage } from '../../actions/navigation-actions'
-import { Navigation } from '../../types'
-
-interface HomeProps {
-  goToUpcomingPerformances: () => void
-}
-const Home = (props: HomeProps) => {
+const Home = (props: RouteComponentProps<{}>) => {
   return (
-    <Page>
+    <div>
       <h1 style={{fontSize: '8em'}}>Opera Collective Space</h1>
       <Button 
         content='Upcoming Performances'
         color='blue'
-        onClick={props.goToUpcomingPerformances}
       />
-    </Page>
+    </div>
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
-  return {
-    goToUpcomingPerformances: () => {
-      dispatch(
-        navigateToPage(Navigation.Page.UpcomingPerformances)
-      )
-    }
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Home)
+export default withRouter(Home)

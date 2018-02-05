@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-import PageDisplay from './pages'
+import Navbar from './components/navbar'
+import Page from './components/page'
 
 interface AppProps {
   
@@ -20,7 +21,8 @@ class App extends React.Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <PageDisplay />
+        <Navbar />
+        <Page />
       </div>
     )
   }

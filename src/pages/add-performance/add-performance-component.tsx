@@ -1,14 +1,14 @@
 import * as React from 'react'
 
 import { Header } from 'semantic-ui-react'
-import Page from '../../components/page'
 
 import { Performance } from '../../types'
 import AddPerformanceForm, { AddPerformanceFormData } from './add-performance-form'
 
-interface AddPerformanceComponentProps {
+import { RouteComponentProps } from 'react-router-dom'
+
+export interface AddPerformanceComponentProps extends RouteComponentProps<{}> {
   addPerformance: (performance: Performance) => void
-  goToUpcomingPerformances: () => void
 }
 
 class AddPerformanceComponent extends React.Component<AddPerformanceComponentProps> {
@@ -19,15 +19,15 @@ class AddPerformanceComponent extends React.Component<AddPerformanceComponentPro
   onSubmit = (data: AddPerformanceFormData) => {
     const performance = {image: '', ...data}
     this.props.addPerformance(performance)
-    this.props.goToUpcomingPerformances()
+    this.props.history.push('/upcoming-performances')
   }
 
   render() {
     return (
-      <Page>
+      <div>
         <Header as='h2' content='Add Performance' />
         <AddPerformanceForm onSubmit={this.onSubmit}/>
-      </Page>
+      </div>
     )
   }
 }

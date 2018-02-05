@@ -1,38 +1,35 @@
 import * as React from 'react'
 
 import { Header } from 'semantic-ui-react'
-import Page from '../../components/page'
 import SignInForm from './sign-in-form'
 
 import { User } from '../../types/user-types'
 
 import { connect } from 'react-redux'
-import { Dispatch, } from 'redux' 
+import { Dispatch } from 'redux' 
 import StoreState from '../../store/state'
 import { signIn } from '../../actions/auth-actions'
 
-import { navigateToPage } from '../../actions/navigation-actions'
-import { Navigation } from '../../types'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-interface SignInProps {
+interface SignInProps extends RouteComponentProps<{}> {
   signIn: (user: User) => void
-  goToHome: () => void
 }
-class SignIn extends React.Component<SignInProps> {
+class SignIn extends React.Component<SignInProps & SignInProps> {
   constructor(props: SignInProps) {
     super(props) 
   }
 
   onSubmit = (user: User) => {
     this.props.signIn(user)
-    this.props.goToHome()
+    this.props.history.replace('/')
   }
   render() {
     return (
-      <Page>
+      <div>
         <Header as='h2' content='Sign In' />
         <SignInForm onSubmit={this.onSubmit}/>
-      </Page>
+      </div>
     )
   }
 }
@@ -41,14 +38,13 @@ const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
   return {
     signIn: (user: User) => {
       dispatch(signIn(user))
-    },
-    goToHome: () => {
-      dispatch(navigateToPage(Navigation.Page.HomePage))
     }
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignIn)
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(SignIn)
+)

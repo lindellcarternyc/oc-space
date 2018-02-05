@@ -1,18 +1,42 @@
 import * as React from 'react'
 
 import { Container } from 'semantic-ui-react'
+import { Switch, Route } from 'react-router-dom'
 
-import Navbar from '../navbar'
+import Home from '../../pages/home'
+import UpcomingPerformances from '../../pages/upcoming-performances'
+import SignIn from '../../pages/sign-in'
+import AddPerformance from '../../pages/add-performance'
 
 interface PageProps {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 const Page = (props: PageProps): JSX.Element => {
   return (
     <div>
-      <Navbar/>
       <Container style={{marginTop: '4em'}}>
-        {props.children}
+        <Switch>
+          <Route 
+            exact
+            path='/'
+            component={Home}
+          />
+          <Route
+            exact
+            path='/upcoming-performances'
+            component={UpcomingPerformances}
+          />
+          <Route
+            exact
+            path='/sign-in'
+            component={SignIn}
+          />
+          <Route 
+            exact
+            path='/add-performance'
+            component={AddPerformance}
+          />
+        </Switch>
       </Container>
     </div>
   )
