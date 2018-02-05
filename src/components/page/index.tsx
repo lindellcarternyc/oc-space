@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Container } from 'semantic-ui-react'
 import { Switch, Route } from 'react-router-dom'
 
-import Home from '../../pages/home'
+import HomePage from '../home-page/home-page'
 import UpcomingPerformances from '../../pages/upcoming-performances'
 import SignIn from '../../pages/sign-in'
 import AddPerformance from '../../pages/add-performance'
@@ -19,7 +19,7 @@ const Page = (props: PageProps): JSX.Element => {
           <Route 
             exact
             path='/'
-            component={Home}
+            component={HomePage}
           />
           <Route
             exact
