@@ -1,7 +1,7 @@
 import { Performance } from '../types'
 
 interface PerformancesState {
-  upcomingPerformances: Performance[]
+  upcomingPerformances: {[_id: string]: Performance}
 }
 
 export default PerformancesState

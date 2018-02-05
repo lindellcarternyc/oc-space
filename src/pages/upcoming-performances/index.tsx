@@ -6,6 +6,7 @@ import PerformanceCards from '../../components/performance-card/performance-card
 import { Performance } from '../../types'
 import { connect } from 'react-redux'
 import StoreState from '../../store/state'
+import { getUpcomingPerformances } from '../../reducer'
 
 interface UpcomingPerformancesProps {
   performances: Performance[]
@@ -22,7 +23,7 @@ const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
 
 const mapStateToProps = (state: StoreState) => {
   return {
-    performances: state.performancesState.upcomingPerformances
+    performances: getUpcomingPerformances(state)
   }
 }
 

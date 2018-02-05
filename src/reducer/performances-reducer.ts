@@ -8,12 +8,15 @@ const initialState: PerformancesState = {
   upcomingPerformances: getPerformances()
 }
 
+let id = 0
+
 const performancesReducer: Reducer<PerformancesState> = 
   (state: PerformancesState = initialState, action: PerformancesAction) => {
   
   switch (action.type) {
     case AddPerformanceActionType:
-      const upcomingPerformances = [...state.upcomingPerformances, action.payload.performance]
+      const _id = 'A_' + id.toString(10)
+      const upcomingPerformances = {...state.upcomingPerformances, [_id]: action.payload.performance}
       return { ...state, upcomingPerformances }
 
     default:
@@ -22,3 +25,8 @@ const performancesReducer: Reducer<PerformancesState> =
 }
 
 export default performancesReducer
+
+export const getUpcomingPerformances = (state: PerformancesState) => {
+  const { upcomingPerformances } = state
+  return Object.keys(upcomingPerformances).map(k => upcomingPerformances[k])
+}
