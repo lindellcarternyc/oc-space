@@ -10,3 +10,4 @@ export const isValidPassword = (password: string): boolean => {
 }
 
 export { default as ImageUtils } from './image-utils'
+export { isValidEmailValue } from './auth-utils'

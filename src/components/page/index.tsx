@@ -4,9 +4,9 @@ import { Container } from 'semantic-ui-react'
 import { Switch, Route } from 'react-router-dom'
 
 import HomePage from '../home-page/home-page'
-import UpcomingPerformances from '../../pages/upcoming-performances'
-import SignIn from '../../pages/sign-in'
-import AddPerformance from '../../pages/add-performance'
+import UpcomingPerformancesPage from '../upcoming-performances-page/upcoming-performances-page'
+import SignInPage from '../sign-in-page/sign-in-page'
+import AddPerformancePage from '../add-performance-page/add-performance-page'
 
 interface PageProps {
   children?: React.ReactNode
@@ -24,17 +24,17 @@ const Page = (props: PageProps): JSX.Element => {
           <Route
             exact
             path='/upcoming-performances'
-            component={UpcomingPerformances}
+            component={UpcomingPerformancesPage}
           />
           <Route
             exact
             path='/sign-in'
-            component={SignIn}
+            component={SignInPage}
           />
           <Route 
             exact
             path='/add-performance'
-            component={AddPerformance}
+            component={AddPerformancePage}
           />
         </Switch>
       </Container>

@@ -5,7 +5,7 @@ import { Header } from 'semantic-ui-react'
 import { Performance } from '../../types'
 import PerformanceCards from '../performance-card/performance-cards'
 
-interface UpcomingPerformancesPageComponentProps {
+export interface UpcomingPerformancesPageComponentProps {
   upcomingPerformances: Performance[]
 }
 
