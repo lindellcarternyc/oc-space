@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as moment from 'moment'
 
 import { Form, Input } from 'semantic-ui-react'
 
@@ -48,16 +49,22 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
       this.state.location !== undefined
   }
 
+  formatDate(date: string): string {
+    const formatted = moment(date, 'YYYY-MM-DD').format('ddd, MMMM D')
+    return formatted
+  }
+
   onSubmit = (evt: React.SyntheticEvent<HTMLElement>) => {
     evt.preventDefault()
     evt.stopPropagation()
 
     if (this.isValid()) {
-      const { date, time, location } = this.state
+      const date = this.formatDate(this.state.date!)
+      const time = this.state.time! + ' PM'
+      const location = this.state.location!
+
       const performance: Performance = {
-        date: date!,
-        time: time!,
-        location: location!
+        date, time, location
       }
       this.props.onSubmit(performance)
     }
