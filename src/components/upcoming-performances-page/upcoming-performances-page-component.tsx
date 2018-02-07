@@ -6,7 +6,7 @@ import { Performance } from '../../types'
 import PerformanceCards from '../performance-card/performance-cards'
 
 export interface UpcomingPerformancesPageComponentProps {
-  upcomingPerformances: Performance[]
+  upcomingPerformances: {id: string, performance: Performance}[]
 }
 
 const UpcomingPerformancesPageComponent = (props: UpcomingPerformancesPageComponentProps) => {

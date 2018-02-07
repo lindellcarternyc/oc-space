@@ -16,7 +16,7 @@ const UpcomingPerformances = (props: UpcomingPerformancesProps) => {
   return (
     <div>
       <Header as='h2' content='Upcoming Performances' />
-      <PerformanceCards performances={props.performances}/>
+      <PerformanceCards performances={[]}/>
     </div>
   )
 }

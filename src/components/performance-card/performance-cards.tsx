@@ -4,10 +4,11 @@ import { CardGroup } from 'semantic-ui-react'
 import PerformanceCard from './'
 import { Performance } from '../../types'
 
-const cards = (performances: Performance[]): JSX.Element[] => {
-  return performances.map(performance => {
+const cards = (performances: {id: string, performance: Performance}[]): JSX.Element[] => {
+  return performances.map(({id, performance}) => {
     return (
       <PerformanceCard 
+        id={id}
         key={performance.date + '__' + performance.location}
         performance={performance}
       />
@@ -15,7 +16,7 @@ const cards = (performances: Performance[]): JSX.Element[] => {
   })
 }
 
-const PerformanceCards = (props: {performances: Performance[]}): JSX.Element => {
+const PerformanceCards = (props: {performances: {id: string, performance: Performance}[]}): JSX.Element => {
   return (
     <CardGroup>
       {cards(props.performances)}

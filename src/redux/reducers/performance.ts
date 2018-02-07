@@ -27,12 +27,19 @@ const performancesReducer = (
 }
 
 export default performancesReducer
-export const getPerformances = (state: PerformancesState): Performance[] => {
-  return Object.keys(state.performances).reduce<Performance[]>(
+export const getPerformances = (state: PerformancesState): {id: string, performance: Performance}[] => {
+  return Object.keys(state.performances).reduce<{id: string, performance: Performance}[]>(
     ((prev, curr) => {
-      const p = state.performances[curr]
+      const p = {
+        id: curr,
+        performance: state.performances[curr]
+      }
       prev.push(p)
       return prev
     })
   , [])
+}
+
+export const getPerformanceById = (state: PerformancesState): (id: string) => Performance | undefined => {
+  return (matchId) => state.performances[matchId]
 }
