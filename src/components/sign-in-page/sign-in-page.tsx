@@ -8,7 +8,7 @@ import { getUserForEmail } from '../../data/user-data'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import State from '../../redux/state/types'
-import { signIn } from '../../actions/auth-actions'
+import { signIn } from '../../redux/actions/auth'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 interface SignInPageProps extends RouteComponentProps<{}> {

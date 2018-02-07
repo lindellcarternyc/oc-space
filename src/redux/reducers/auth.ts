@@ -1,5 +1,5 @@
 import AuthState from '../state/auth-state'
-import AuthAction, { SignInActionType, SignOutActionType } from '../../actions/auth-actions'
+import AuthAction, { SignInActionType, SignOutActionType } from '../actions/auth/types'
 
 const initialState: AuthState = {
   user: null
