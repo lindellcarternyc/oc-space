@@ -1,22 +1,22 @@
 import { Performance } from '../../types'
 import PerformancesState from '../state/performances-state'
 import PerformancesAction, { AddPerformanceActionType } from '../actions/performance/types'
-
+import { v1 } from 'uuid'
 import * as performanceData from '../../data/performances-data'
 
+import { getStateFromLocalStorage } from '../../local-storage/local-storage'
+
 const initialState: PerformancesState = {
-  performances: performanceData.getPerformances()
+  performances: getStateFromLocalStorage() || performanceData.getPerformances()
 }
 
-let _id = 0
 const performancesReducer = (
   state: PerformancesState = initialState, action: PerformancesAction
 ): PerformancesState => {
   switch (action.type) {
     case AddPerformanceActionType:
       const performance = action.payload.performance
-      const id = 'a_' + _id.toString(10)
-      _id++
+      const id = v1()
       let performances = state.performances
       performances[id] = performance
       return { ...state, performances}

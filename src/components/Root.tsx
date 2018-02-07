@@ -2,15 +2,22 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import configureStore from '../redux/configure-store'
+import { configureStore, saveStore } from '../redux/configure-store'
 import App from '../App'
 
 const store = configureStore()
+store.subscribe(() => {
+  saveStore(store.getState())
+})
 
-export default () => (
-  <Provider store={store}>
-    <Router >
-      <App />
-    </Router>
-  </Provider>
-)
+const Root = () => {
+    return (
+      <Provider store={store}>
+        <Router >
+          <App />
+        </Router>
+      </Provider>
+    )
+}
+
+export default Root

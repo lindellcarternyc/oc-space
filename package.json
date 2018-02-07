@@ -14,7 +14,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "semantic-ui-css": "^2.2.14",
-    "semantic-ui-react": "^0.77.2"
+    "semantic-ui-react": "^0.77.2",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -30,6 +31,7 @@
     "@types/react-router": "^4.0.21",
     "@types/react-router-dom": "^4.2.3",
     "@types/redux-logger": "^3.0.5",
+    "@types/uuid": "^3.4.3",
     "typescript": "^2.7.1"
   }
 }

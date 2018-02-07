@@ -1,8 +1,9 @@
 import AuthState from '../state/auth-state'
 import AuthAction, { SignInActionType, SignOutActionType } from '../actions/auth/types'
+import { getUserFromSessionStorage } from '../../session-storage'
 
 const initialState: AuthState = {
-  user: null
+  user: getUserFromSessionStorage() || null
 }
 
 const authReducer = (state: AuthState = initialState, action: AuthAction): AuthState => {
