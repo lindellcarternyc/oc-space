@@ -1,14 +1,15 @@
 import { connect } from 'react-redux'
-import StoreState from '../../store/state'
-import { getUpcomingPerformances } from '../../reducer'
+import State from '../../redux/state/types'
+
+import { getPerformances } from '../../redux/reducers/root'
 
 import UpcomingPerformancesPageComponent, { 
   UpcomingPerformancesPageComponentProps 
 }  from './upcoming-performances-page-component'
 
-const mapStateToProps = (state: StoreState): UpcomingPerformancesPageComponentProps => {
+const mapStateToProps = (state: State): UpcomingPerformancesPageComponentProps => {
   return {
-    upcomingPerformances: getUpcomingPerformances(state)
+    upcomingPerformances: getPerformances(state)
   }
 }
 export default connect(

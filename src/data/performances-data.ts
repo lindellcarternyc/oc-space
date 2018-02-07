@@ -1,6 +1,6 @@
 import { Performance, Location } from '../types'
 
-const Performances: {[_id: string]: Performance} = {
+const Performances: {[id: string]: Performance} = {
   'a': {
     date: 'Fri, Februrary 2',
     location: Location.PortAuthority,

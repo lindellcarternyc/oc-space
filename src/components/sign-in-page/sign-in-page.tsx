@@ -7,7 +7,7 @@ import { getUserForEmail } from '../../data/user-data'
 
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import StoreState from '../../store/state'
+import State from '../../redux/state/types'
 import { signIn } from '../../actions/auth-actions'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
@@ -33,7 +33,7 @@ class SignInPage extends React.Component<SignInPageProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<StoreState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<State>) => {
   return {
     signIn: (user: User) => {
       dispatch(signIn(user))

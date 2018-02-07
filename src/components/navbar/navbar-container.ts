@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import StoreState from '../../store/state'
-import * as AuthUtils from '../../utils/auth-utils'
+import State from '../../redux/state/types'
+import { isAuthenticated } from '../../redux/reducers/root'
 
-const mapStateToProps = (state: StoreState) => {
-  const user = state.authState.user
-  const authenticated = AuthUtils.isAuthenticated(user)
-  return { authenticated}
+const mapStateToProps = (state: State) => {
+  return {
+    authenticated: isAuthenticated(state)
+  }
 }
 
 import NavbarComponent  from './navbar-component'
