@@ -1,13 +1,22 @@
 import { Performance } from '../../types'
 import PerformancesState from '../state/performances-state'
 import PerformancesAction, { AddPerformanceActionType } from '../actions/performance/types'
+
 import { v1 } from 'uuid'
 import * as performanceData from '../../data/performances-data'
+import LocalStorage from '../../services/local-storage'
 
-import { getStateFromLocalStorage } from '../../local-storage/local-storage'
-
+type Performances = {[id: string]: Performance}
+let initialPerformances: Performances
+let data = LocalStorage.getSlice('performances')
+if (data !== undefined) {
+  // tslint:disable-next-line:no-string-literal
+  initialPerformances = data['performances']
+} else {
+  initialPerformances = performanceData.getPerformances()
+}
 const initialState: PerformancesState = {
-  performances: getStateFromLocalStorage() || performanceData.getPerformances()
+  performances: initialPerformances
 }
 
 const performancesReducer = (
@@ -15,9 +24,9 @@ const performancesReducer = (
 ): PerformancesState => {
   switch (action.type) {
     case AddPerformanceActionType:
-      const performance = action.payload.performance
+      const { performance } = action.payload
       const id = v1()
-      let performances = state.performances
+      let { performances } = state
       performances[id] = performance
       return { ...state, performances}
 

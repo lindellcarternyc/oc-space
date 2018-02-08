@@ -2,12 +2,16 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { configureStore, saveStore } from '../redux/configure-store'
+import { configureStore } from '../redux/configure-store'
+import LocalStorage from '../services/local-storage'
+import SessionStorage from '../services/session-storage'
 import App from '../App'
 
 const store = configureStore()
 store.subscribe(() => {
-  saveStore(store.getState())
+  const { performances, auth } = store.getState()
+  LocalStorage.setSlice('performances', performances)
+  SessionStorage.setSlice('user', auth.user || {})
 })
 
 const Root = () => {
