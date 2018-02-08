@@ -13,7 +13,7 @@ const PerformanceDetailPageComponent = (props: PerformanceDetailPageComponentPro
     <div>
       <Header as='h2'>
         {`${performance.date} @ ${performance.location}`}
-        <Header.Subheader content={performance.time + ' PM'} />
+        <Header.Subheader content={performance.time} />
       </Header>
       <LocationImage location={performance.location} />
     </div>
