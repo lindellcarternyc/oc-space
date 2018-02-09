@@ -1,10 +1,10 @@
 import * as React from 'react'
-import * as moment from 'moment'
 
-import { Form, Input } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 import { Location, Performance } from '../../types'
 import LocationDropdown from '../location-dropdown/location-dropdown'
+import NewPerformanceDate from './new-performance-date'
 
 interface AddPerformanceFormProps {
   onSubmit: (performance: Performance) => void
@@ -15,10 +15,6 @@ interface AddPerformanceFormState {
   time?: '6 - 9' | '6 - 10'
 }
 
-const DateFormat = {
-  formFormat: 'YYYY-MM-DD',
-  parsedFormat: 'ddd, MMMM D'
-}
 class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPerformanceFormState> {
   constructor(props: AddPerformanceFormProps) {
     super(props)
@@ -30,8 +26,7 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
     }
   }
 
-  onChangeDate = (evt: React.SyntheticEvent<HTMLElement>, data: { value: string}) => {
-    const date = data.value
+  onChangeDate = (date: string) => {
     this.setState({date})
   }
 
@@ -54,17 +49,12 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
       this.state.location !== undefined
   }
 
-  formatDate(date: string): string {
-    const formatted = moment(date, DateFormat.formFormat).format(DateFormat.parsedFormat)
-    return formatted
-  }
-
   onSubmit = (evt: React.SyntheticEvent<HTMLElement>) => {
     evt.preventDefault()
     evt.stopPropagation()
 
     if (this.isValid()) {
-      const date = this.formatDate(this.state.date!)
+      const date = this.state.date!
       const time = this.state.time! + ' PM'
       const location = this.state.location!
 
@@ -76,15 +66,12 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
   }
 
   render() {
-    const today = moment().format(DateFormat.formFormat)
     return (
       <Form onSubmit={this.onSubmit}>
         <Form.Field
           label='Date'
-          control={Input}
-          type='date'
-          onChange={this.onChangeDate}
-          min={today}  
+          control={NewPerformanceDate}
+          onChange={this.onChangeDate} 
         />
         <Form.Field 
           label='Location' 
