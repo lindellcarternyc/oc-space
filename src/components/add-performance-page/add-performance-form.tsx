@@ -5,13 +5,14 @@ import { Form } from 'semantic-ui-react'
 import { Location, Performance } from '../../types'
 import LocationDropdown from '../location-dropdown/location-dropdown'
 import NewPerformanceDate from './new-performance-date'
+import { todayAsOutput } from '../../utils/date-utils'
 
 interface AddPerformanceFormProps {
   onSubmit: (performance: Performance) => void
 }
 interface AddPerformanceFormState {
-  date?: string
-  location?: Location
+  date: string
+  location: Location
   time?: '6 - 9' | '6 - 10'
 }
 
@@ -20,8 +21,8 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
     super(props)
 
     this.state = {
-      date: undefined,
-      location: undefined, 
+      date: todayAsOutput(),
+      location: Location.NONE,
       time: undefined
     }
   }
@@ -44,9 +45,8 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
   }
 
   isValid(): boolean {
-    return this.state.date !== undefined && 
-      this.state.time !== undefined && 
-      this.state.location !== undefined
+      return this.state.time !== undefined && 
+      this.state.location !== Location.NONE
   }
 
   onSubmit = (evt: React.SyntheticEvent<HTMLElement>) => {

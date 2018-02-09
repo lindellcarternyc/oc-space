@@ -21,3 +21,7 @@ export const minDate = (lastDate: string | undefined) => {
   
   return m.format(DateFormat.inputFormat)
 }
+
+const today = () => moment()
+export const todayAsInput = () => today().format(DateFormat.inputFormat)
+export const todayAsOutput = () => today().format(DateFormat.outputFormat)
