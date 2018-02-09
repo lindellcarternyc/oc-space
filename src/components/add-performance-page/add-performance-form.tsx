@@ -14,6 +14,11 @@ interface AddPerformanceFormState {
   location?: Location
   time?: '6 - 9' | '6 - 10'
 }
+
+const DateFormat = {
+  formFormat: 'YYYY-MM-DD',
+  parsedFormat: 'ddd, MMMM D'
+}
 class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPerformanceFormState> {
   constructor(props: AddPerformanceFormProps) {
     super(props)
@@ -50,7 +55,7 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
   }
 
   formatDate(date: string): string {
-    const formatted = moment(date, 'YYYY-MM-DD').format('ddd, MMMM D')
+    const formatted = moment(date, DateFormat.formFormat).format(DateFormat.parsedFormat)
     return formatted
   }
 
@@ -71,12 +76,15 @@ class AddPerformanceForm extends React.Component<AddPerformanceFormProps, AddPer
   }
 
   render() {
+    const today = moment().format(DateFormat.formFormat)
     return (
       <Form onSubmit={this.onSubmit}>
         <Form.Field
+          label='Date'
           control={Input}
           type='date'
           onChange={this.onChangeDate}
+          min={today}  
         />
         <Form.Field 
           label='Location' 
